@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Job Board</title>
+    <title>Job Board - {{ $title ?? "Onboarding top Talent" }}</title>
 </head>
 <body>
     <h1>Job Board</h1>
 
     <nav>
         <a href="/">Home</a>
-        <a href="/About">About</a>
-        <a href="/Contact">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
     </nav>
-    
+
+    {{ $slot }}
 </body>
 </html>
