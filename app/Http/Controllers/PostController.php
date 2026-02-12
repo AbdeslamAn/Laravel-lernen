@@ -12,6 +12,6 @@ class PostController extends Controller
         $data = Post::all();
 
         // Pass the data to the view
-        return view('post.index', ['post' => $data]);
+        return view('post.index', ['posts' => $data]);
     }
 }
