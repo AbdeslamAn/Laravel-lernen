@@ -14,4 +14,15 @@ class PostController extends Controller
         // Pass the data to the view
         return view('post.index', ['posts' => $data]);
     }
+
+    function create(){
+        $post = Post::create([
+            'title' => 'My first Post',
+            'body' => 'This is my content',
+            'author' => 'Abdeslam',
+            'published' => true
+        ]);
+
+        return redirect('/blog');
+    }
 }
