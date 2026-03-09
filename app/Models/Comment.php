@@ -11,4 +11,8 @@ class Comment extends Model
     protected $fillable = ['author', 'comment'];
 
     protected $guarded = ['id'];
+
+    public function post(){
+        return $this->belongsTo(Post::class);
+    }
 }

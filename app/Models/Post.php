@@ -12,4 +12,9 @@ class Post extends Model
     protected $fillable = ['title', 'body', 'author', 'published']; // fields that can be updates
 
     protected $guarded = ['id']; // cannot be updates/assigned
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
