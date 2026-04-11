@@ -26,9 +26,9 @@ class CommentController extends Controller
         $comment = Comment::create([
             'author' => 'Abdeslam',
             'content' => 'This is a Test Comment',
-            'post_id' => 46
+            'post_id' => 13
         ]);
 
-        return redirect('/blog');
+        return redirect('/comments');
     }
 }
