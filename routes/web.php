@@ -14,6 +14,7 @@ Route::get('/contact', [IndexController::class, 'contact']);
 Route::get('/job', [JobController::class, 'index'] );
 Route::get('/blog', [PostController::class, 'index']);
 Route::get('/blog/create', [PostController::class, 'create']);
+Route::get('/blog/delete', [PostController::class, 'delete']);
 Route::get('/blog/{id}', [PostController::class, 'show']);
 
 Route::get('/comments', [CommentController::class, 'index']);
