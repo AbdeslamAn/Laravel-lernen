@@ -11,4 +11,8 @@ class Tag extends Model
     protected $fillable = ['title']; // fields that can be updates
 
     protected $guarded = ['id']; // cannot be updates/assigned
+
+    public function posts(){
+        return $this->belongsToMany(Post::class);
+    }
 }
