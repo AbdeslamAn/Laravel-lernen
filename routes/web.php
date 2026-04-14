@@ -24,3 +24,6 @@ Route::get('/comments/create', [CommentController::class, 'create']);
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tags/create', [TagController::class, 'create']);
 Route::get('/tags/delete', [TagController::class, 'delete']);
+
+Route::get('/tags/test_many', [TagController::class, 'testManyToMany']);
+
