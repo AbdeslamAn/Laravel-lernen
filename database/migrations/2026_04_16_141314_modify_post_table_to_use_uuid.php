@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('use_uuid', function (Blueprint $table) {
-            //
+        Schema::dropIfExists('post');
+
+        Schema::create('post', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string("title");
+            $table->string("author");
+            $table->string("body");
+            $table->boolean("published");
+            $table->timestamps();
         });
     }
 
@@ -21,8 +28,15 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('use_uuid', function (Blueprint $table) {
-            //
+        Schema::dropIfExists('post');
+
+        Schema::create('post', function (Blueprint $table) {
+            $table->id();
+            $table->string("title");
+            $table->string("author");
+            $table->string("body");
+            $table->boolean("published");
+            $table->timestamps();
         });
     }
 };
