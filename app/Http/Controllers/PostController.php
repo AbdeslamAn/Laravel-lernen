@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    use HasFactory
     function index(){
         // Eloquent ORM -> Get all data
         $data = Post::cursorPaginate(4);
