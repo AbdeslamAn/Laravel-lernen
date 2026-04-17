@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    use HasFactory
+    use HasFactory;
     function index(){
         // Eloquent ORM -> Get all data
         $data = Post::cursorPaginate(4);
