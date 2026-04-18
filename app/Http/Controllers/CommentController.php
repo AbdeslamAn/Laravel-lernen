@@ -10,7 +10,7 @@ class CommentController extends Controller
 
     function index(){
         // Eloquent ORM -> Get all data
-        $data = Comment::all();
+        $data = Comment::cursorPaginate(3);
 
         // Pass the data to the view
         return view('comment.index', ['comments' => $data]);
