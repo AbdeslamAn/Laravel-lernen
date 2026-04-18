@@ -23,11 +23,14 @@ class CommentController extends Controller
     }
 
     function create(){
-        $comment = Comment::create([
-            'author' => 'Abdeslam',
-            'content' => 'This is a Test Comment',
-            'post_id' => 13
-        ]);
+        // $comment = Comment::create([
+        //     // 'author' => 'Abdeslam',
+        //     // 'content' => 'This is a Test Comment',
+        //     // 'post_id' => 13
+
+
+        // ]);
+        Comment::factory(5)->create();
 
         return redirect('/comments');
     }
