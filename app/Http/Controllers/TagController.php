@@ -45,9 +45,9 @@ class TagController extends Controller
 
         // ]));
 
-        $tag = Tag::find(1);
+        $tag = Tag::find('019dbb5e-7dfc-7182-b9a2-c2007176871e');
 
-        $tag->posts()->attach((46));
+        $tag->posts()->attach('87aa55ca-aed8-433c-83f8-582ca6a9a23a');
 
         return response()->json(([
             'tag' => $tag->title,
