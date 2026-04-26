@@ -14,16 +14,13 @@ Route::get('/contact', [IndexController::class, 'contact']);
 
 Route::get('/job', [JobController::class, 'index'] );
 Route::get('/blog', [PostController::class, 'index']);
-Route::get('/blog/create', [PostController::class, 'create']);
-Route::get('/blog/delete', [PostController::class, 'delete']);
 Route::get('/blog/{id}', [PostController::class, 'show']);
 
 Route::get('/comments', [CommentController::class, 'index']);
-Route::get('/comments/create', [CommentController::class, 'create']);
+
 
 Route::get('/tags', [TagController::class, 'index']);
-Route::get('/tags/create', [TagController::class, 'create']);
-Route::get('/tags/delete', [TagController::class, 'delete']);
+
 
 Route::get('/tags/test_many', [TagController::class, 'testManyToMany']);
 
