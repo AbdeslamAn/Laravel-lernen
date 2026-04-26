@@ -25,8 +25,8 @@ class TagController extends Controller
         return redirect('/tags');
     }
 
-    public function delete(){
-        Tag::destroy(4);
+    public function delete($id){
+        Tag::destroy($id);
 
         return redirect('/tags');
     }
