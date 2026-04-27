@@ -2,58 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
-use App\Models\Post;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    function index(){
-        // Eloquent ORM -> Get all data
-        $data = Tag::all();
-
-        // Pass the data to the view
-        return view('tag.index', ['tags' => $data]);
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
     }
 
-
-    function create(){
-        Tag::create([
-            'title' => 'CSS',
-        ]);
-
-        return redirect('/tags');
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
-    public function delete($id){
-        Tag::destroy($id);
-
-        return redirect('/tags');
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
-    function testManyToMany(){
-        // $post46 = Post::find(46);
-        // $post51 = Post::find(51);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
 
-        // $post46->tags()->attach([1,5]);
-        // $post51->tags()->attach([5]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-        // return response()->json(([
-        //     'post46' => $post46->tags,
-        //     'post51' => $post51->tags
-
-        // ]));
-
-        $tag = Tag::find('019dbb5e-7dfc-7182-b9a2-c2007176871e');
-
-        $tag->posts()->attach('87aa55ca-aed8-433c-83f8-582ca6a9a23a');
-
-        return response()->json(([
-            'tag' => $tag->title,
-            'posts' => $tag->posts
-
-        ]));
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
