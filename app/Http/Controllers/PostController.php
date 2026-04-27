@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,7 +12,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+
+        // Eloquent ORM -> Get all data
+        $data = Post::cursorPaginate(4);
+
+        // Pass the data to the view
+        return view('post.index', ['posts' => $data]);
     }
 
     /**
@@ -35,7 +41,9 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view('post.show', ['post' => $post]);
     }
 
     /**

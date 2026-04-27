@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -11,7 +12,11 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+         // Eloquent ORM -> Get all data
+        $data = Comment::cursorPaginate(3);
+
+        // Pass the data to the view
+        return view('comment.index', ['comments' => $data]);
     }
 
     /**
@@ -35,7 +40,9 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        return view('comment.show', ['comment' => $comment]);
     }
 
     /**
