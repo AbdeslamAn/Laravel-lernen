@@ -12,14 +12,15 @@ Route::get('/about', [IndexController::class, 'about']);
 Route::get('/contact', [IndexController::class, 'contact']);
 
 
-Route::get('/job', [JobController::class, 'index'] );
-Route::get('/blog', [PostController::class, 'index']);
-Route::get('/blog/{id}', [PostController::class, 'show']);
+Route::resource('job', JobController::class);
 
-Route::get('/comments', [CommentController::class, 'index']);
+Route::resource('blog', PostController::class);
+
+Route::resource('comments', CommentController::class);
+
+Route::resource('tags', TagController::class);
 
 
-Route::get('/tags', [TagController::class, 'index']);
 
 
 Route::get('/tags/test_many', [TagController::class, 'testManyToMany']);
