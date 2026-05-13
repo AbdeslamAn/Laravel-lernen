@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostApiController extends Controller
@@ -12,7 +13,9 @@ class PostApiController extends Controller
      */
     public function index()
     {
-        //
+        $data = Post::paginate(5);
+
+        return response($data, 200);
     }
 
     /**
@@ -20,7 +23,9 @@ class PostApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Post::create($request->all());
+
+        return response($data, 201);
     }
 
     /**
@@ -28,7 +33,9 @@ class PostApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Post::find($id);
+
+        return response($data, 200);
     }
 
     /**
@@ -36,7 +43,10 @@ class PostApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Post::find($id);
+        $data->update($request->all());
+
+        return response($data, 200);
     }
 
     /**
@@ -44,6 +54,9 @@ class PostApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Post::find($id);
+        $data->delete();
+
+        return response(null, 204);
     }
 }
