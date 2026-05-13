@@ -35,6 +35,10 @@ class PostApiController extends Controller
     {
         $data = Post::find($id);
 
+        if(!$data){
+            return response(["message" => "Post not found"], 404);
+        }
+
         return response($data, 200);
     }
 
@@ -46,6 +50,10 @@ class PostApiController extends Controller
         $data = Post::find($id);
         $data->update($request->all());
 
+         if(!$data){
+            return response(["message" => "Post not found"], 404);
+        }
+
         return response($data, 200);
     }
 
@@ -56,6 +64,10 @@ class PostApiController extends Controller
     {
         $data = Post::find($id);
         $data->delete();
+
+         if(!$data){
+            return response(["message" => "Post not found"], 404);
+        }
 
         return response(null, 204);
     }
