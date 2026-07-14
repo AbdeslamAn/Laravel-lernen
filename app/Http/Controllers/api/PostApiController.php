@@ -25,7 +25,7 @@ class PostApiController extends Controller
     {
         $data = Post::create($request->all());
 
-        return response($data, 201);
+        return response(["data" => $data, "message" => "Post Created succsessfully", 201]);
     }
 
     /**
