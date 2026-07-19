@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogPostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PostController extends Controller
     {
 
         // Eloquent ORM -> Get all data
-        $data = Post::cursorPaginate(4);
+        $data = Post::latest()->cursorPaginate(4);
 
         // Pass the data to the view
         return view('post.index', ['posts' => $data]);
@@ -31,9 +32,17 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogPostRequest $request)
     {
-        print_r($request->all());
+       $post = new Post();
+       $post->title = $request->input('title');
+       $post->author = $request->input('author');
+       $post->body = $request->input('body');
+       $post->published = $request->has('published');
+
+       $post->save();
+
+       return redirect('/blog')->with('success', 'Post Created Successfully');
     }
 
     /**
