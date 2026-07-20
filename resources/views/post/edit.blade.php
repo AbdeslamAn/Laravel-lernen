@@ -1,6 +1,6 @@
 <x-layout title="Edit" titlePage="Edit Post: {{ $post->title}}">
 
-    <form method="POST" action="/blog">
+<form method="POST" action="/blog/{{ $post->id }}">
     @csrf
     @method('PUT')
   <div class="space-y-12">
@@ -12,7 +12,7 @@
         <div class="sm:col-span-3">
           <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
           <div class="mt-2">
-            <input id="title" value="{{ $post->title }}" type="text" name="title" autocomplete="given-name" class="{{ $errors->has('title') ? 'outline-red-500' : 'outline-gray-300'}} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1  placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+            <input id="title" value="{{ old('title', $post->title)  }}" type="text" name="title" autocomplete="given-name" class="{{ $errors->has('title') ? 'outline-red-500' : 'outline-gray-300'}} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1  placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>
           @error('title')
               <span class="text-red-500">{{ $message }}</span>
@@ -22,7 +22,7 @@
         <div class="sm:col-span-3">
           <label for="author" class="block text-sm/6 font-medium text-gray-900">Author</label>
           <div class="mt-2">
-            <input id="author" value="{{ $post->author }}" type="text" name="author" autocomplete="family-name" class=" {{ $errors->has('author') ? 'outline-red-500' : 'outline-gray-300'}} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1  placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+            <input id="author" value="{{ old('title', $post->author) }}" type="text" name="author" autocomplete="family-name" class=" {{ $errors->has('author') ? 'outline-red-500' : 'outline-gray-300'}} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1  placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>
           @error('author')
               <span class="text-red-500">{{ $message }}</span>
@@ -32,7 +32,7 @@
         <div class="col-span-full">
           <label for="body" class="block text-sm/6 font-medium text-gray-900">Content</label>
           <div class="mt-2">
-            <textarea id="body" name="body" rows="3" class=" {{ $errors->has('body') ? 'outline-red-500' : 'outline-gray-300'}} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1  placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">{{ $post->body }}</textarea>
+            <textarea id="body" name="body" rows="3" class=" {{ $errors->has('body') ? 'outline-red-500' : 'outline-gray-300'}} block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1  placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">{{ old('title', $post->body) }}</textarea>
           </div>
           <p class="mt-3 text-sm/6 text-gray-600">Write a few sentences about the article.</p>
             @error('body')
