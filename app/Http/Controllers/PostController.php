@@ -60,7 +60,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-         $post = Post::find($id);
+         $post = Post::findOrFail($id);
 
         return view('post.edit', ['post' => $post]);
     }
@@ -68,9 +68,18 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BlogPostRequest $request, string $id)
     {
-        //
+         $post = Post::findOrFail($id);
+         $post->title = $request->input('title');
+         $post->author = $request->input('author');
+         $post->body = $request->input('body');
+         $post->published = $request->has('published');
+
+       $post->save();
+
+       return redirect('/blog')->with('success', 'Post Updated Successfully');
+
     }
 
     /**
