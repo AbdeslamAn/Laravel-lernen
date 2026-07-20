@@ -8,9 +8,16 @@
     <a href="/blog/create" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Now Post</a>
   </div><br>
 @foreach ($posts as $post)
-    <h1 class="text-3xl">{{ $post->title}}</h1>
-    <p class="text-2xl">{{ $post->author }}</p>
-    <p>{{ $post->body }}</p>
+  <div class="flex justify-between items-center border border-gray-200 px-4 py-6 my-2">
+    <div>
+        <h1 class="text-3xl">{{ $post->title}}</h1>
+        <p class="text-2xl">{{ $post->author }}</p>
+    </div>
+    <div>
+        <a class="text-yellow-500 hover:text-gray-500" href="/blog/{{ $post->id }}/edit">Edit</a>
+        <button class="text-red-500 hover:text-gray-500">Delete</button>
+    </div>
+  </div>
 @endforeach
 <br>
 {{ $posts->links() }}
