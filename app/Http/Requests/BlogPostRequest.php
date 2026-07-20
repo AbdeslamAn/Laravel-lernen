@@ -7,7 +7,7 @@ use Override;
 
 class BlogPostRequest extends FormRequest
 {
-   
+
      /**
      * Get the validation rules that apply to the request.
      *
@@ -16,7 +16,7 @@ class BlogPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'bail|required|unique:post',
+            'title' => "bail|required|unique:post,title,{$this->input('id')}",
             'author' => 'required',
             'body' => 'required'
         ];
