@@ -43,7 +43,7 @@
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 id="dialog-title" class="text-base font-semibold text-gray-900">Delete Confirmation</h3>
               <div class="mt-2">
-                <p class="text-sm text-gray-500">Are you sure you want to deleted post <span id="post-title" class="font-semibold text-red-400 underline"></span>? This action cannot be undone.</p>
+                <p class="text-sm text-gray-500">Are you sure you want to delete the post <span id="post-title" class="font-semibold text-red-400 underline"></span>? This action cannot be undone.</p>
               </div>
             </div>
           </div>
