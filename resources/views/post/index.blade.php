@@ -17,7 +17,16 @@
         <a class="rounded-md bg-yellow-300 px-2.5 py-1.5 text-sm font-semibold hover:bg-gray-950/10" href="/blog/{{ $post->id }}/edit">Edit</a>
 
     {{-- Model confirm before delete post --}}
-<button command="show-modal" commandfor="dialog" class="rounded-md bg-red-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10">Delete</button>
+<button data-id="{{ $post->id }}" data-title="{{ $post->title }}" command="show-modal" commandfor="dialog" class="delete-btn rounded-md bg-red-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10">Delete</button>
+
+
+    </div>
+  </div>
+@endforeach
+<br>
+{{ $posts->links() }}
+
+
 <el-dialog>
   <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
     <el-dialog-backdrop class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
@@ -32,16 +41,16 @@
               </svg>
             </div>
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 id="dialog-title" class="text-base font-semibold text-gray-900">Deactivate account</h3>
+              <h3 id="dialog-title" class="text-base font-semibold text-gray-900">Delete Confirmation</h3>
               <div class="mt-2">
-                <p class="text-sm text-gray-500">Are you sure you want to deleted post {{ $post->title }}? All of your data will be permanently removed. This action cannot be undone.</p>
+                <p class="text-sm text-gray-500">Are you sure you want to deleted post <span id="post-title" class="font-semibold text-red-400 underline"></span>? This action cannot be undone.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
             {{-- Form for Delete Post --}}
-            <form method="POST" action="/blog/{{ $post->id }}">
+            <form method="POST" id="delete-form">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class= "inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">Delete</button>
@@ -54,10 +63,23 @@
   </dialog>
 </el-dialog>
 
+<script>
+    const buttons = document.querySelectorAll('.delete-btn');
 
-    </div>
-  </div>
-@endforeach
-<br>
-{{ $posts->links() }}
+const title = document.getElementById('post-title');
+const form = document.getElementById('delete-form');
+
+buttons.forEach(button => {
+
+    button.addEventListener('click', () => {
+
+        title.textContent = button.dataset.title;
+
+        form.action = `/blog/${button.dataset.id}`;
+
+    });
+
+});
+</script>
+
 </x-layout>
