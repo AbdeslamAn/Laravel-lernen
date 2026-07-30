@@ -16,17 +16,14 @@
     <div>
         <a class="rounded-md bg-yellow-300 px-2.5 py-1.5 text-sm font-semibold hover:bg-gray-950/10" href="/blog/{{ $post->id }}/edit">Edit</a>
 
-    {{-- Model confirm before delete post --}}
-<button data-id="{{ $post->id }}" data-title="{{ $post->title }}" command="show-modal" commandfor="dialog" class="delete-btn rounded-md bg-red-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10">Delete</button>
-
-
+        <button data-id="{{ $post->id }}" data-title="{{ $post->title }}" command="show-modal" commandfor="dialog" class="delete-btn rounded-md bg-red-300 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10">Delete</button>
     </div>
   </div>
 @endforeach
 <br>
 {{ $posts->links() }}
 
-
+{{-- Model confirm before delete post --}}
 <el-dialog>
   <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
     <el-dialog-backdrop class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
@@ -64,7 +61,7 @@
 </el-dialog>
 
 <script>
-    const buttons = document.querySelectorAll('.delete-btn');
+const buttons = document.querySelectorAll('.delete-btn');
 
 const title = document.getElementById('post-title');
 const form = document.getElementById('delete-form');
