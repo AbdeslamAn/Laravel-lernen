@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -13,7 +14,7 @@ class CommentController extends Controller
     public function index()
     {
          // Eloquent ORM -> Get all data
-        $data = Comment::cursorPaginate(3);
+        $data = Comment::latest()->cursorPaginate(3);
 
         // Pass the data to the view
         return view('comment.index', ['comments' => $data]);
@@ -32,7 +33,14 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $post = Post::findOrFail($request->post_id);
+
+        $post->comments()->create([
+            'author' => $request->input('author'),
+            'content' => $request->input('content'),
+        ]);
+
+       return redirect('/comments')->with('success', 'Comment Created Successfully');
     }
 
     /**
