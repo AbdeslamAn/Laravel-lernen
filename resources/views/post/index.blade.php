@@ -29,7 +29,7 @@
       <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" clip-rule="evenodd" fill-rule="evenodd" />
     </svg>
   </button>
-  <el-menu anchor="bottom end" popover class="w-30 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+  <el-menu anchor="bottom end" popover class="w-mx origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
     <div class="py-1">
       <a href="/blog/{{ $post->id }}/edit" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Edit</a>
       <button data-id="{{ $post->id }}" data-title="{{ $post->title }}" command="show-modal" commandfor="dialog" class="delete-btn block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Delete</button>
@@ -62,20 +62,61 @@
   </div>
 
   <!-- Action Buttons (Like, Comment, Share) -->
-  <div class="flex items-center justify-between px-2 py-1 text-gray-600 font-medium text-sm">
-    <button class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-lg transition">
+  <div class="flex items-center justify-between px-50 py-1 text-gray-600 font-medium text-sm">
+    {{-- <button class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-lg transition">
       <span>👍</span>
       <span class="text-xs">Like</span>
-    </button>
+    </button> --}}
+
+    {{-- Show comments this Post and show form to add New comment --}}
     <button class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-lg transition">
       <span>💬</span>
-      <span class="text-xs">Comment</span>
+      <span data-id="{{ $post->id }}" onclick="showForm()" class="text-xs">Comment</span>
     </button>
-    <button class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-lg transition">
+
+    {{-- <button class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-lg transition">
       <span>↗️</span>
       <span class="text-xs">Share</span>
-    </button>
-  </div>
+    </button> --}}
+   </div>
+
+   <div id="formElement" class="w-full hidden items-center justify-center px-2 py-1 text-gray-600 font-medium text-sm">
+    {{-- Form to add New comment --}}
+        <form method="POST" action="/comments" class="w-full">
+            @csrf
+
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                    <input type="hidden" name="author" value="{{ $post->author }}">
+
+                <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <label for="comment" class="sr-only">Your comment</label>
+                    <textarea id="content" name="content" rows="6" class="{{ $errors->has('content') ? 'outline-red-500' : 'outline-gray-300'}} px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                    placeholder="Write a comment..." required></textarea>
+
+                    @error('content')
+                    <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mt-6 flex justify-center items-center gap-x-6">
+                    <button onclick="closeForm()" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                </div>
+        </form>
+
+        {{-- Show and close Form comment --}}
+        <script>
+        function showForm() {
+            document.getElementById('formElement').style.display = 'block';
+        }
+        function closeForm() {
+            document.getElementById('formElement').style.display = 'none';
+        }
+    </script>
+    </div>
+
+
+
 </div>
 @endforeach
 <br>
